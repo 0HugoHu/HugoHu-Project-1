@@ -1,28 +1,52 @@
 """CLI interface for ids706_python_template project.
-
-Be creative! do whatever you want!
-
-- Install click or typer and create a CLI app
-- Use builtin argparse
-- Start a web application
-- Import things from your .base module
 """
+import os
+
+from ids706_python_template.lib import (
+    describe_data,
+    get_female_ds,
+    get_male_ds,
+    plot_gender_diff,
+    plot_overall_salary,
+    read_data,
+)
 
 
-def main():  # pragma: no cover
+def plot(arg, male_ds, female_ds):
     """
-    The main function executes on commands:
-    `python -m ids706_python_template` and `$ ids706_python_template `.
+    Plot the data
+    Args:
+        arg: True if prints each gender's salary distribution,
+             False if prints the difference between the two
+        male_ds: Male dataset
+        female_ds: Female dataset
 
-    This is your program's entry point.
-
-    You can change this function to do whatever you want.
-    Examples:
-        * Run a test suite
-        * Run a server
-        * Do some other stuff
-        * Run a command line application (Click, Typer, ArgParse)
-        * List all available tasks
-        * Run an application (Flask, FastAPI, Django, etc.)
+    Returns: None
     """
-    print("This will do something")
+    if arg:
+        plot_overall_salary(male_ds, female_ds)
+    else:
+        plot_gender_diff(male_ds, female_ds)
+
+
+def main(plot_function=plot):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file_path = os.path.join(script_dir, "Glassdoor Gender Pay Gap.csv")
+    # Check if the file exists and then read it
+    if os.path.exists(csv_file_path):
+        ds = read_data(csv_file_path)
+    else:
+        print("CSV file not found:", csv_file_path)
+        return
+
+    print("Data description:")
+    print(describe_data(ds))
+
+    female_ds = get_female_ds(ds)
+    male_ds = get_male_ds(ds)
+
+    print("Plotting overall salary distribution")
+    plot_function(True, male_ds, female_ds)
+
+    print("Plotting gender salary difference")
+    plot_function(False, male_ds, female_ds)

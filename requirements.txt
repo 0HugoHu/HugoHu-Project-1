@@ -5,3 +5,11 @@
 # You can also run `make switch-to-poetry` to use the poetry package manager.
 
 pytest
+pytest-mock
+ruff
+pandas
+matplotlib
+plotly
+seaborn
+scipy
+nbval
