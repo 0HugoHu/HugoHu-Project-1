@@ -13,3 +13,4 @@ plotly
 seaborn
 scipy
 nbval
+black
