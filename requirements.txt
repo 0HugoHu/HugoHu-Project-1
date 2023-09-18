@@ -14,3 +14,5 @@ seaborn
 scipy
 nbval
 black
+jupyter
+mypy
