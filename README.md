@@ -15,6 +15,7 @@
 <br />
 
 **Duke IDS706 Individual Project 1 Requirements:**
+
 The project structure must include the following files:
 - Jupyter Notebook with:
   - Cells that perform descriptive statistics using Polars or Panda.
