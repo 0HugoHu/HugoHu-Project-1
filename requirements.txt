@@ -16,3 +16,7 @@ nbval
 black
 jupyter
 mypy
+isort
+pytest-cov
+gitchangelog
+coverage
